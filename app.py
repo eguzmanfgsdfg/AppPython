@@ -15,6 +15,7 @@ def handle_json():
   return  (data)
     #response = client.post('/data_extraction'), data=json.dumps(payload), headers=(accept_json)
     #return{'foo': 'bar'}
+
     #return {'aas':11,'as':122}
   #else:
    # return "Content type is not supported."
