@@ -12,3 +12,4 @@ pycodestyle==2.7.0
 Werkzeug==2.0.1
 toml==0.10.2
 psycopg2==2.9.9
+PyJWT==2.8.0
