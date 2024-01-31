@@ -17,6 +17,7 @@ def model(input) -> str:
     from sklearn.preprocessing import LabelEncoder
     import numpy as np
 
+    print('Score (probabilidad de fraude)')
     le = LabelEncoder()
     le.classes_ = np.load('./classes.npy', allow_pickle=True)
 
