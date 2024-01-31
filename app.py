@@ -6,6 +6,7 @@ from flask import Flask, request,json
 from db import *
 import jwt
 # ...
+
 def get(data,nombre,str1=True) -> str:
    try:
       dat= data[nombre] #if str1 else f'{}'
@@ -33,13 +34,6 @@ def setToken(encoded_jwt) -> str:
   # dencoded_jwt = jwt.decode (encoded_jwt, "secret1", algorithm=["HS256"])
    print(dencoded_jwt)
    return dencoded_jwt
-
-
-@app.route('/v1/', methods=['GET'])
-def handle_jlogin_():
-  print ('++++++++++++++++++hola++++++++++')
-  return  ({'status':'ok'})
-
 
 @app.route('/v1/login', methods=['GET'])
 def handle_jlogin():
