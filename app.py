@@ -40,6 +40,7 @@ def handle_jlogin_():
   print ('++++++++++++++++++hola++++++++++')
   return  ({'status':'ok'})
 
+
 @app.route('/v1/login', methods=['GET'])
 def handle_jlogin():
   content_type = request.headers.get('Content-Type')
@@ -85,7 +86,7 @@ def handle_json():
 #            rango_in_bank_currency]] #'Amount Charged in Bank Currency'
   print ('data ',valores)
   val= model(valores)   
-  
+  print ('data .') 
 
   query=  "INSERT INTO public.transaccion("
   query+=  "    id, merchant, \"subMerchant\", amount, currency, \"promoMonths\", months, date, \"entryMode\", serial, acquirer, card, \"expYear\", \"expMonth\", reference, reference2, \"merchantName\", operation, bin, country, mcc, authentication, account, trigger, \"respCode\", \"authorization\", \"cardholderName\", email, score, \"CreationDate\""
@@ -105,9 +106,9 @@ def handle_json():
   query+=      " );"
         
   print("query ["+query+"]")
-  sp_insert (query)
+  #sp_insert (query)
 
-  sp_all()
+  #sp_all()
   return  ({'data':data,'porce':val})
     #response = client.post('/data_extraction'), data=json.dumps(payload), headers=(accept_json)
     #return{'foo': 'bar'}
