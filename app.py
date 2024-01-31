@@ -34,6 +34,12 @@ def setToken(encoded_jwt) -> str:
    print(dencoded_jwt)
    return dencoded_jwt
 
+
+@app.route('/v1/', methods=['GET'])
+def handle_jlogin_():
+  print ('++++++++++++++++++hola++++++++++')
+  return  ({'status':'ok'})
+
 @app.route('/v1/login', methods=['GET'])
 def handle_jlogin():
   content_type = request.headers.get('Content-Type')
@@ -175,5 +181,6 @@ def handle_json_update():
   #else:
    # return "Content type is not supported."
 
+
 if __name__ == '__main__':
-    app.run(debug=False, port=4000)
+    app.run(debug=False, port=8000)
