@@ -28,7 +28,7 @@ def sp_insert(query) -> str:
     print ('[',query,']')
     varrr= cursor1.execute(query)
 #    cursor1.execute("update articulos set precio=50 where codigo=3")
-    #conexion1.commit()
+    conexion1.commit()
     #cursor1.execute("select codigo, descripcion, precio from articulos")
     retur=''    
     print('fila ',cursor1)
@@ -39,6 +39,24 @@ def sp_insert(query) -> str:
     #print('responde')
     return retur
 
+def sp_update(query) -> str:
+    print('dentro sdfwe wert query ',query)
+    conexion1 = psycopg2.connect(host="db-dmrzl-bzpnac.cry7lrrhvglg.us-east-2.rds.amazonaws.com",port='5432'  , user="postgres", password="G3n3r42023!.", database="transaccion_api")
+    print ('sdfgsdfffgff')
+    cursor1=conexion1.cursor()
+    print ('[',query,']')
+    varrr= cursor1.execute(query)
+#    cursor1.execute("update articulos set precio=50 where codigo=3")
+    conexion1.commit()
+    #cursor1.execute("select codigo, descripcion, precio from articulos")
+    retur=''    
+    print('fila ',cursor1)
+    print('varrr ',varrr)
+    #for fila in cursor1:
+    #    print(fila)
+    #conexion1.close()   
+    #print('responde')
+    return retur
 
 def sp_all() -> str:
     query ='select * from public.transaccion'
