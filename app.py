@@ -58,8 +58,9 @@ def handle_json():
   data = json.loads(request.data)
   print (request.data)
   print (data['date'])  
-  id= str( uuid.uuid4())#'0fa2b371-1017-4859-98bf-61a63ca34eac'
-  
+ # id= str( uuid.uuid4())#'0fa2b371-1017-4859-98bf-61a63ca34eac'
+  id= '0fa2b371-1017-4859-98bf-61a63ca34eac'
+   
   valores = [[
      id                           ,get(data,'merchant') , get(data,'subMerchant')  ,                          '',int(get(data,'amount'))         ,
      get(data,'additionalAmount') ,get(data,'currency') , get(data,'promoMonths')  ,get(data,'months')          ,'',
