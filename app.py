@@ -38,6 +38,10 @@ def setToken(encoded_jwt) -> str:
    print(dencoded_jwt)
    return dencoded_jwt
 
+@app.route('/v1/', methods=['GET'])
+def handle_jlogin___():
+  return  ({'token':'encoded_jwt'})
+
 @app.route('/v1/token', methods=['GET'])
 def handle_jlogin():
   content_type = request.headers.get('Content-Type')
