@@ -1,4 +1,5 @@
-def model(input) -> str:
+def model(input) -> str:    
+   # -*- coding: utf-8 -*-
     """
     Created on Sun Jan 21 19:15:02 2024
 
@@ -6,7 +7,7 @@ def model(input) -> str:
     """
 
     ##########################
-    #    CARGA DE MODELOS    #
+    #CARGA DE MODELOS
     ##########################
 
     #Librerias
@@ -17,18 +18,16 @@ def model(input) -> str:
     from sklearn.preprocessing import LabelEncoder
     import numpy as np
 
-    print('Score (probabilidad de fraude)')
     le = LabelEncoder()
-    le.classes_ = np.load('./classes.npy', allow_pickle=True)
+    le.classes_ = np.load('drive/My Drive/Genera Capital/Análisis/Historicos/Modelo clasificación/classes.npy', allow_pickle=True)
 
     # Model class
-    model = torch.load('./full_model_scripted.pt')
+    model = torch.load('drive/My Drive/Genera Capital/Análisis/Historicos/Modelo clasificación/full_model_scripted.pt')
     model.eval()
-###
-  #  input = [[
- #   '0fa2b371-1017-4859-98bf-61a63ca34eac','','','',40,'0','0','','','19/01/2024 00:35:23','0','104.28.92.207','[BZP154]Fixwir_8457239_BR','','473702******5130','0','0','MC-13379191','0','','0','47370291','US','65101','JEFFERSON CITY','MO','OTHER','Visa','0','0','0','0',40,'elvisjrbridgeman@icloud.com','ELVIS BRIDGEMAN','0','0','0'
-#    ]]
 
+    input = [[
+    '0fa2b371-1017-4859-98bf-61a63ca34eac','','','',40,'0','0','','','19/01/2024 00:35:23','0','104.28.92.207','[BZP154]Fixwir_8457239_BR','','473702******5130','0','0','MC-13379191','0','','0','47370291','US','65101','JEFFERSON CITY','MO','OTHER','Visa','0','0','0','0',40,'elvisjrbridgeman@icloud.com','ELVIS BRIDGEMAN','0','0','0'
+    ]]
 
     #-------------------
     #PRUEBA DEL MODELO
@@ -52,7 +51,7 @@ def model(input) -> str:
         elif (monto > 2500) & (monto <= 5000): rango = 'tier_8_5000'
         elif  (monto > 5000): rango = 'tier_9_5001'
 
-        monto_2 = input[0][4]
+        monto_2 = input[0][5]
         if (monto_2 <= 50): rango_in_bank_currency = 'tier_1_50'
         elif (monto_2 > 50) & (monto_2 <= 250): rango_in_bank_currency = 'tier_2_250'
         elif (monto_2 > 250) & (monto_2 <= 500) : rango_in_bank_currency = 'tier_3_500'
@@ -65,10 +64,10 @@ def model(input) -> str:
 
 
         #SELECCIÓN DE CAMPOS PARA MODELO ML
-        X = [[input[0][1],input[0][2],rango,input[0][5],input[0][6], #'Afiliacion', 'SubAffiliation','Amount', 'additionalAmount', 'currency',
+        X = [[input[0][1],input[0][2],rango,rango_in_bank_currency,input[0][6], #'Afiliacion', 'SubAffiliation','Amount', 'additionalAmount', 'currency',
             input[0][7],input[0][8],input[0][10],input[0][11],input[0][12], #'Promo Months','months','entryMode','IPAddress','Merchant Account Name',
             input[0][13],input[0][19],input[0][20],input[0][21],input[0][22], #'Bank Account Name','Descriptor','operation', 'Bin8', 'Customer Country',
-            input[0][23],input[0][24],input[0][25],input[0][26],input[0][27], #'Customer Zip Code', 'Customer City','Customer State','Credit Card Type', 'Credit Card Brand',
+            input[0][23],input[0][25],input[0][25],input[0][26],input[0][27], #'Customer Zip Code', 'Customer City','Customer State','Credit Card Type', 'Credit Card Brand',
             rango_in_bank_currency]] #'Amount Charged in Bank Currency'
 
         new_data_list = X[0]
@@ -102,4 +101,3 @@ def model(input) -> str:
 
     print('Score (probabilidad de fraude)')
     print(hist_adam['ypred_prob'])
-    return hist_adam['ypred_prob']

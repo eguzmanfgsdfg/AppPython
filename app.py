@@ -1,9 +1,9 @@
 from flask import Flask, jsonify, request
 from datetime import datetime,timedelta
 app = Flask(__name__)
-from Modelo import *
+from Modelo_ import *
 from flask import Flask, request,json
-from db import *
+from db_ import *
 import jwt
 print("+++++++++++++++++++++++++++++++++++ 0")
 #import uuid
@@ -42,7 +42,7 @@ def setToken(encoded_jwt) -> str:
 def handle_jlogin___():
   return  ({'token':'encoded_jwt'})
 
-"""
+
 @app.route('/v1/token', methods=['GET'])
 def handle_jlogin():
   content_type = request.headers.get('Content-Type')
@@ -129,7 +129,7 @@ def handle_json_update():
   #else:
    # return "Content type is not supported."
 
-"""
+
 if __name__ == '__main__':
     print("+++++++++++++++++++++++++++++++++++ main")
     app.run(debug=True, port=8000)
