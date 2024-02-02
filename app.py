@@ -1,15 +1,15 @@
 from flask import Flask, jsonify, request
 from datetime import datetime,timedelta
 app = Flask(__name__)
-from Modelo_ import *
+from Modelo import *
 from flask import Flask, request,json
-from db import *
-import jwt
+#from db import *
+#import jwt
 print("+++++++++++++++++++++++++++++++++++ 0")
 #import uuid
 print("+++++++++++++++++++++++++++++++++++ 1")
 # ...
-
+"""
 def get(data,nombre,str1=True) -> str:
    try:
       dat= data[nombre] #if str1 else f'{}'
@@ -37,7 +37,7 @@ def setToken(encoded_jwt) -> str:
   # dencoded_jwt = jwt.decode (encoded_jwt, "secret1", algorithm=["HS256"])
    print(dencoded_jwt)
    return dencoded_jwt
-
+"""
 @app.route('/v1/', methods=['GET'])
 def handle_jlogin___():
   return  ({'token':'encoded_jwt'})
