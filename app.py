@@ -6,7 +6,7 @@ from flask import Flask, request,json
 from db import *
 import jwt
 print("+++++++++++++++++++++++++++++++++++ 0")
-import uuid
+#import uuid
 print("+++++++++++++++++++++++++++++++++++ 1")
 # ...
 
