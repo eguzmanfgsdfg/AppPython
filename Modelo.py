@@ -16,8 +16,8 @@ def model(input) -> str:
 
     #LOAD EL ENCODER GUARDADO
     from sklearn.preprocessing import LabelEncoder
-    import numpy as np
-
+    #import numpy as np
+     
     le = LabelEncoder()
     le.classes_ = np.load('./classes.npy', allow_pickle=True)
 
