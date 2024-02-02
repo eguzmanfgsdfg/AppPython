@@ -5,7 +5,9 @@ from Modelo import *
 from flask import Flask, request,json
 from db import *
 import jwt
+print("+++++++++++++++++++++++++++++++++++ 0")
 import uuid
+print("+++++++++++++++++++++++++++++++++++ 1")
 # ...
 
 def get(data,nombre,str1=True) -> str:
@@ -123,4 +125,5 @@ def handle_json_update():
 
 
 if __name__ == '__main__':
+    print("+++++++++++++++++++++++++++++++++++ main")
     app.run(debug=True, port=8000)
