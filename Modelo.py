@@ -1,5 +1,5 @@
 def model(input) -> str:    
-   # -*- coding: utf-8 -*-
+    # -*- coding: utf-8 -*-
     """
     Created on Sun Jan 21 19:15:02 2024
 
@@ -26,7 +26,7 @@ def model(input) -> str:
     model.eval()
 
     input = [[
-    '0fa2b371-1017-4859-98bf-61a63ca34eac','','','',40,0,'0','','','19/01/2024 00:35:23','0','104.28.92.207','[BZP154]Fixwir_8457239_BR','','473702******5130','0','0','MC-13379191','0','','0','47370291','US','65101','JEFFERSON CITY','MO','OTHER','Visa','0','0','0','0',40,'elvisjrbridgeman@icloud.com','ELVIS BRIDGEMAN','0','0','0'
+        '0fa2b371-1017-4859-98bf-61a63ca34eac','','','',40,0,'0','','','19/01/2024 00:35:23','0','104.28.92.207','[BZP154]Fixwir_8457239_BR','','473702******5130','0','0','MC-13379191','0','','0','47370291','US','65101','JEFFERSON CITY','MO','OTHER','Visa','0','0','0','0',40,'elvisjrbridgeman@icloud.com','ELVIS BRIDGEMAN','0','0','0'
     ]]
 
     #-------------------
