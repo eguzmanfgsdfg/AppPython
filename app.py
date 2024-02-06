@@ -98,7 +98,7 @@ def handle_json():
         
    print("query ["+query+"]")
   #sp_insert (query)
-   return  ({'id':id,'porce':val})
+   return  ({'id':id,'resultado':val})
 
 
 @app.route('/v1/update', methods=['POST'])
