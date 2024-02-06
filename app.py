@@ -2,13 +2,19 @@ from flask import Flask, jsonify, request
 from datetime import datetime,timedelta
 app = Flask(__name__)
 from Modelo import *
+from Modelo import fit
 from flask import Flask, request,json
+import json
 from db import *
 import jwt
 print("+++++++++++++++++++++++++++++++++++ 0")
 import uuid
 print("+++++++++++++++++++++++++++++++++++ 1")
 # ...
+
+import torch
+model = torch.load('./full_model_scripted.pt')
+model.eval()
 
 def get(data,nombre,str1=True) -> str:
    try:
@@ -60,23 +66,20 @@ def handle_json():
    print (setToken(request.headers.get('token')))
    content_type = request.headers.get('Content-Type')
    data = json.loads(request.data)
-   print (request.data)
-   print (data['date'])  
- # id= str( uuid.uuid4())#'0fa2b371-1017-4859-98bf-61a63ca34eac'
+
    id= '0fa2b371-1017-4859-98bf-61a63ca34eac'
    
    valores = [[
-      id                           ,get(data,'merchant') , get(data,'subMerchant')  ,                          '',int(get(data,'amount'))         ,
-      get(data,'additionalAmount') ,get(data,'currency') , get(data,'promoMonths')  ,get(data,'months')          ,'',
-      get(data,'entryMode')        ,get(data,'serial')   , get(data,'merchantName') ,get(data,'bankName')        ,'',
-      ''                           ,''                   , ''                       ,''                          ,get(data,'descriptor'),
-      get(data,'operation')        ,get(data,'bin')      , get(data,'countryClient'),get(data,'postalCodeClient'), get(data,'cityClient'),
-      get(data,'stateClient')      ,get(data,'cardType') , get(data,'cardBrand')
+      id                           ,data['data']['merchant'], data['data']['subMerchant']  ,                          '',data['data']['amount']         ,
+      data['data']['additionalAmount'] ,data['data']['currency'] , data['data']['promoMonths']  ,data['data']['months']          ,'',
+      data['data']['entryMode']        ,data['data']['serial']   , data['data']['merchantName'] ,data['data']['bankName']        ,'',
+      ''                           ,''                   , ''                       ,''                          ,data['data']['descriptor'],
+      data['data']['operation']        ,data['data']['bin']      , data['data']['countryClient'],data['data']['postalCodeClient'], data['data']['cityClient'],
+      data['data']['stateClient']      ,data['data']['cardType'] , data['data']['cardBrand']
    ]]
-  
+
    print ('data ',valores)
-   val= model(valores)   
-   print ('data .') 
+   val= fit(model,valores)   
 
    query=  "INSERT INTO public.transaccion("
    query+=  "    id, merchant, \"subMerchant\", amount, currency, \"promoMonths\", months, date, \"entryMode\", serial, acquirer, card, \"expYear\", \"expMonth\", reference, reference2, \"merchantName\", operation, bin, country, mcc, authentication, account, trigger, \"respCode\", \"authorization\", \"cardholderName\", email, score, \"CreationDate\""
@@ -90,7 +93,7 @@ def handle_json():
    query+=  get(data,'operation') +"' ,"+get(data,'bin')  +", '"+ get(data,'countryClient')  +"' ,"
    query+=     " "+  get(data,'mcc')  +" ,'"+ get(data,'authentication')  +"' , "+ get(data,'account')  +" , '"+get(data,'trigger')   
    query+= "' ,"+ ( get(data,'respCode')  if get(data,'respCode')  else '99') +","+(get(data,'authorization')  if  get(data,'authorization') else '0')  +", '" + get(data,'cardholderName') +"' , '"+get(data,'email')  +"',"+ f'{val}' +", TO_TIMESTAMP('"+  get(data,'date')+"', 'dd-mm-yyyy hh24:mi:ss')  "
-   query+=     " , '"+  get(data,'postalCodeClient') +"' ,'"+ get(data,'cityClient') +"' , '"+  get(data,'stateClient') +"' , "+( get(data,'additionalAmount') if get(data,'additionalAmount') else null)    +""
+   query+=     " , '"+  get(data,'postalCodeClient') +"' ,'"+ get(data,'cityClient') +"' , '"+  get(data,'stateClient') +"' , "+( get(data,'additionalAmount') if get(data,'additionalAmount') else get(data,'additionalAmount'))    +""
    query+=      " );"
         
    print("query ["+query+"]")
